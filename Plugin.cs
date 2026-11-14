@@ -2,14 +2,13 @@
 
 using System;
 using System.Text.RegularExpressions;
-using AnimalGame.core;
 using Godot;
 using Godot.Collections;
 
 namespace DeerEssentials;
 
 /// <summary>
-/// Script Explanation Here.
+/// Main Plugin Script
 /// </summary>
 [Tool]
 public partial class Plugin : EditorPlugin
@@ -27,10 +26,7 @@ public partial class Plugin : EditorPlugin
 		OnBuild = 1, // bump version when building project
 		OnExport = 2, // bump version when exporting project
 	}
-	
-	// store setting paths for 
 
-	
 	#endregion
 	
 	// -----------------------------------------------------------------------------------------------------------------
@@ -137,11 +133,9 @@ public partial class Plugin : EditorPlugin
 	/// <summary>
 	/// Increase the build number and store a version string inside projectsettings.
 	/// the format will match the versionformatting setting.
-	/// valid value identifiers: %build, %yy, %yyyy, %M, %MM, %MMM/%mon, %MMMM/%month, %dd, %ddd %dddd/day, %m, %mm/min, %ss/sec
+	/// valid value identifiers: %build, %yy, %yyyy, %M, %MM, %MMM/%mon, %MMMM/%month, %dd, %ddd %dddd/day, %hh, %h, %m, %mm/min, %ss/sec
 	/// most identifiers are case insensitive, except %MM, %M, %mm, %m
 	/// <example>"build %build - %yyyy/%MM/%dd (%hh\h %m\m)" becomes "build 153 - 2003/01/13 (15h 5m)"</example>
-
-	/// <example></example>
 	/// </summary>
 	public static void BumpBuildNumber()
 	{
@@ -163,14 +157,13 @@ public partial class Plugin : EditorPlugin
 		info = Regex.Replace(info, "(?i)%dd", $"{t.Day:D2}");
 		info = Regex.Replace(info, "(?i)%d", $"{t.Day}");
 		info = Regex.Replace(info, "(?i)%hh", $"{t.Hour:D2}");
+		info = Regex.Replace(info, "(?i)%h", $"{t.Hour}");
 		info = Regex.Replace(info, "%mm|(?i)%min", $"{t.Minute:D2}");
 		info = Regex.Replace(info, "%m", $"{t.Minute}");
 		info = Regex.Replace(info, "(?i)%ss|(?i)%sec", $"{t.Second:D2}");
 		info = Regex.Replace(info, "(?i)%s", $"{t.Second}");
 		// allow escaping characters
 		info = info.Replace("\\", "");
-		//info = info.Replace("%ssss", $"{t.Millisecond:D4}");
-		//info = info.Replace("%ss", $"{t.Millisecond}"[..2]);
 		
 		ProjectSettings.SetSetting(SettingNames.BuildNumber, buildnumber);
 		ProjectSettings.SetSetting(SettingNames.InternalVersionString, info);
