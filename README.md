@@ -1,5 +1,5 @@
 # deer-devtools
-Various dev tools i use for game development in godot
+Various dev tools i use for game development in godot. You can customize the addon's behavior in your project settings.
 
 ## Features:
 ### Copy C# node reference 
