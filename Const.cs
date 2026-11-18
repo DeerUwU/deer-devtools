@@ -16,5 +16,5 @@ public static class SettingDefaults
 
 public static class Icons
 {
-	public const string ActionCopy = "res://addons/DeerEssentials/assets/icons/ActionCopy.svg";
+	public const string ActionCopy = "res://addons/deer-devtools/assets/icons/ActionCopy.svg";
 }
